@@ -1,4 +1,4 @@
-import json
+import json, time
 
 jsonData = '{"game":{"id":406,"dayOffset":406,"boardState":["","","","","",""],"currentRowIndex":0,"status":"IN_PROGRESS","timestamps":{"lastPlayed":null,"lastCompleted":null}},"settings":{"hardMode":false,"darkMode":true,"colorblindMode":false},"stats":{"currentStreak":0,"maxStreak":0,"guesses":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"fail":0},"winPercentage":0,"gamesPlayed":0,"gamesWon":0,"averageGuesses":0},"timestamp":0}'
 
@@ -32,6 +32,8 @@ stats["guesses"]["fail"] = stats["gamesPlayed"] - stats["gamesWon"]
 stats["winPercentage"] = round(stats["gamesWon"] / stats["gamesPlayed"] * 100)
 stats["averageGuesses"] = round(
     sum((i+1)*rowGuesses[i] for i in range(6)) / stats["gamesWon"])
+
+data["timestamp"] = round(time.time())
 
 print()
 for item in stats:
